@@ -1,28 +1,22 @@
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
-  auth,
   signInAuthWithEmailAndPassword,
 } from "../../utils/firebase/firebaseauth";
-import { useEffect, useState } from "react";
-import { getRedirectResult } from "firebase/auth";
+import {  useState, useContext } from "react";
 import "./sign-in.styles.scss"; // Assuming you have a CSS file for styles
 import { FormInput } from "../../utils/Form-input/form-input.component";
 import Button from "../../utils/button/button.component";
 
+const defaultFormFields = {
+  email: "",
+  password: "",
+};
+
 const Signin = () => {
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const fetchRedirectResult = async () => {
-      const result = await getRedirectResult(auth);
-      if (result && result.user) {
-        await result.user.getIdToken(true);
-        await createUserDocumentFromAuth(result.user);
-        console.log("Redirect sign-in user:", result.user);
-      }
-    };
-    fetchRedirectResult();
-  }, []);
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  
   let signInWithGoogle = async () => {
     setLoading(true);
     try {
@@ -38,7 +32,9 @@ const Signin = () => {
     }
     setLoading(false);
   };
-
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
@@ -46,14 +42,14 @@ const Signin = () => {
     try {
       // Here you would typically call a function to sign in with email and password
       // For example, using Firebase's signInWithEmailAndPassword
-      console.log("Email:", email, "Password:", password);
-      let response = await signInAuthWithEmailAndPassword(auth, email, password);
-        if (response) {
-            console.log("User signed in successfully:", response.user);
-            await response.user.getIdToken(true);
+      let {user} = await signInAuthWithEmailAndPassword(email, password);
+
+        if (user) {
+            await resetFormFields();
         } else {
             console.error("Sign-in failed");
         }
+
     } catch (error) {
       console.error("Error signing in with email and password:", error);
       switch (error.code) {
@@ -92,8 +88,6 @@ const Signin = () => {
           <Button
             buttonType="default"
             type="submit"
-            onClick={signInWithGoogle}
-            disabled={loading}
           >
             Sign In
           </Button>

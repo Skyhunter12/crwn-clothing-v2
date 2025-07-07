@@ -32,20 +32,20 @@ const SignUpForm = () => {
       return;
     }
     try {
-      let userCredential = await createAuthUserWithEmailAndPassword(
+      let {user} = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
-      if (!userCredential) {
+
+      if (!user) {
         console.error("User creation failed");
         return;
       }
-      console.log("User created successfully:", userCredential);
+
       // Optionally, you can also save the displayName to the user profile
       // This can be done using a function like createUserDocumentFromAuth(userCredential.user, { displayName });
       // For now, we will just log the userCredential
-      console.log("User credential:", userCredential);
-      await createUserDocumentFromAuth(userCredential.user, { displayName });
+      await createUserDocumentFromAuth(user, { displayName });
       await requestFormReset();
     } catch (error) {
       console.error("Error creating user:", error);
