@@ -1,4 +1,4 @@
-import { use, useContext } from "react";
+import { useContext } from "react";
 import { CategoriesContext } from "../../context/catagories.context"; // Import the CategoriesContext
 import ProductCard from "../product-card/product-card.component"; // Import the ProductCard component
 import "./category.styles.scss"; // Import the styles for the category component

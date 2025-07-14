@@ -1,7 +1,7 @@
 import "./category.styles.scss";
 
 const CategoryItem = ({ category }) => {
-  let { id, title, imageUrl, subtitle } = category;
+  let { title, imageUrl, subtitle } = category;
   return (
     <div className="directory-item-container">
       <img

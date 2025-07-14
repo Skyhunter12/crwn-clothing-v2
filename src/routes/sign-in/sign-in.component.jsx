@@ -3,7 +3,7 @@ import {
   createUserDocumentFromAuth,
   signInAuthWithEmailAndPassword,
 } from "../../utils/firebase/firebaseauth";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import "./sign-in.styles.scss"; // Assuming you have a CSS file for styles
 import { FormInput } from "../../utils/Form-input/form-input.component";
 import Button, {
@@ -36,6 +36,11 @@ const Signin = () => {
   };
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
+  };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormFields({ ...formFields, [name]: value });
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -79,11 +84,11 @@ const Signin = () => {
         <span>Sign in with your email and password</span>
         <div>
           <label htmlFor="email"></label>
-          <FormInput label="Email" type="email" id="email" required />
+          <FormInput label="Email" type="email" id="email" required onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="password"></label>
-          <FormInput label="Password" type="password" id="password" required />
+          <FormInput label="Password" type="password" id="password" required onChange={handleChange} />
         </div>
         <div className="buttons">
           <Button buttonType={BUTTON_TYPE_CLASSES.base} type="submit">

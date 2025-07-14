@@ -1,7 +1,5 @@
 import { useEffect, useState, createContext } from "react";
-import SHOP_DATA from "../utils/shop-data";
 import {
-  addCollectionAndDocuments,
   getcatalogAndDocuments,
 } from "../utils/firebase/firebaseauth"; // Import your firebase functions if needed
 

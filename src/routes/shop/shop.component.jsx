@@ -1,9 +1,9 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext } from "react";
 import { CategoriesContext } from "../../context/catagories.context"; // Import the ProductContext
 import CategoryPreview from "../../category-preview/category-preview.component"; // Import the CategoryPreview component
 import "./shop.styles.scss"; // Import the styles for the shop component
 
-const Shop = ({}) => {
+const Shop = () => {
   const { categoriesMap } = useContext(CategoriesContext);
 
   return (

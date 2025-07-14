@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 // import "./navigation.styles.scss"; // Assuming you have a CSS file for styles
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg"; // Adjust the path to your logo image
