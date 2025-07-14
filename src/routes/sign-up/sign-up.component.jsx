@@ -4,7 +4,9 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebaseauth";
 import { FormInput } from "../../utils/Form-input/form-input.component";
-import Button from "../../utils/button/button.component";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../utils/button/button.component";
 
 const SignUpForm = () => {
   let defaultFormFields = {
@@ -32,10 +34,7 @@ const SignUpForm = () => {
       return;
     }
     try {
-      let {user} = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      let { user } = await createAuthUserWithEmailAndPassword(email, password);
 
       if (!user) {
         console.error("User creation failed");
@@ -106,7 +105,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <Button type="submit" buttonType="default">
+        <Button type="submit" buttonType={BUTTON_TYPE_CLASSES.base}>
           Sign Up
         </Button>
       </form>

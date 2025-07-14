@@ -1,0 +1,15 @@
+.products-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    row-gap: 50px;
+    justify-items: center;
+    
+}
+.category-title {
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+    justify-content: center;
+}

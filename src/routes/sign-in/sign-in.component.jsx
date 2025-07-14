@@ -3,10 +3,12 @@ import {
   createUserDocumentFromAuth,
   signInAuthWithEmailAndPassword,
 } from "../../utils/firebase/firebaseauth";
-import {  useState, useContext } from "react";
+import { useState, useContext } from "react";
 import "./sign-in.styles.scss"; // Assuming you have a CSS file for styles
 import { FormInput } from "../../utils/Form-input/form-input.component";
-import Button from "../../utils/button/button.component";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../utils/button/button.component"; // Import the Button component
 
 const defaultFormFields = {
   email: "",
@@ -16,7 +18,7 @@ const defaultFormFields = {
 const Signin = () => {
   const [loading, setLoading] = useState(false);
   const [formFields, setFormFields] = useState(defaultFormFields);
-  
+
   let signInWithGoogle = async () => {
     setLoading(true);
     try {
@@ -38,36 +40,35 @@ const Signin = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
-    const password = event.target.password.value;   
+    const password = event.target.password.value;
     try {
       // Here you would typically call a function to sign in with email and password
       // For example, using Firebase's signInWithEmailAndPassword
-      let {user} = await signInAuthWithEmailAndPassword(email, password);
+      let { user } = await signInAuthWithEmailAndPassword(email, password);
 
-        if (user) {
-            await resetFormFields();
-        } else {
-            console.error("Sign-in failed");
-        }
-
+      if (user) {
+        await resetFormFields();
+      } else {
+        console.error("Sign-in failed");
+      }
     } catch (error) {
       console.error("Error signing in with email and password:", error);
       switch (error.code) {
         case "auth/user-not-found":
-            alert("No user found with this email. Please sign up first.");
-            break;
+          alert("No user found with this email. Please sign up first.");
+          break;
         case "auth/wrong-password":
-            alert("Incorrect password. Please try again.");
-            break;
+          alert("Incorrect password. Please try again.");
+          break;
         case "auth/invalid-email":
-            alert("Invalid email format. Please enter a valid email.");
-            break;
+          alert("Invalid email format. Please enter a valid email.");
+          break;
         case "auth/too-many-requests":
-            alert("Too many attempts. Please try again later.");
-            break;
+          alert("Too many attempts. Please try again later.");
+          break;
         default:
-            alert("An error occurred while signing in. Please try again."); 
-            break;
+          alert("An error occurred while signing in. Please try again.");
+          break;
       }
     }
   };
@@ -85,15 +86,12 @@ const Signin = () => {
           <FormInput label="Password" type="password" id="password" required />
         </div>
         <div className="buttons">
-          <Button
-            buttonType="default"
-            type="submit"
-          >
+          <Button buttonType={BUTTON_TYPE_CLASSES.base} type="submit">
             Sign In
           </Button>
           <span className="or">or</span>
           <Button
-            buttonType="google"
+            buttonType={BUTTON_TYPE_CLASSES.google}
             onClick={signInWithGoogle}
             disabled={loading}
           >

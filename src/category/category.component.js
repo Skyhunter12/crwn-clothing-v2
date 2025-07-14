@@ -1,13 +1,16 @@
-import './category.styles.scss';
-import React from 'react';
-
+import "./category.styles.scss";
 
 const CategoryItem = ({ category }) => {
   let { id, title, imageUrl, subtitle } = category;
   return (
-    <div className='category-container'>
-      <img style={{ borderRadius: '5px' }} className="category-image" src={imageUrl} alt={title} />
-      <div className='category-body-container'>
+    <div className="directory-item-container">
+      <img
+        style={{ borderRadius: "5px" }}
+        className="category-image"
+        src={imageUrl}
+        alt={title}
+      />
+      <div className="body">
         <h2>{title}</h2>
         <p>{subtitle}</p>
       </div>
