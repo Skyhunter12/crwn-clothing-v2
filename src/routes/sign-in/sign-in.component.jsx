@@ -14,15 +14,14 @@ const defaultFormFields = {
 
 const Signin = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   const signInWithGoogle = async () => {
     dispatch(googleSignInStart());
   };
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields);
-  };
+  // const resetFormFields = () => {
+  //   setFormFields(defaultFormFields);
+  // };
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -90,7 +89,6 @@ const Signin = () => {
           <Button
             buttonType={BUTTON_TYPE_CLASSES.google}
             onClick={signInWithGoogle}
-            disabled={loading}
           >
             Sign In with Popup
           </Button>

@@ -17,9 +17,9 @@ const SignUpForm = () => {
   let [formFields, setFormFields] = useState(defaultFormFields);
   let { displayName, email, password, confirmPassword } = formFields;
 
-  let requestFormReset = () => {
-    setFormFields(defaultFormFields);
-  };
+  // let requestFormReset = () => {
+  //   setFormFields(defaultFormFields);
+  // };
   console.log("SignUpForm rendered with formFields:", formFields);
   let handleChange = (event) => {
     const { name, value } = event.target;
