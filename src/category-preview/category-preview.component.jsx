@@ -4,7 +4,12 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook from 
 
 const CategoryPreview = ({ title, products }) => {
   const navigate = useNavigate();
-
+  console.log(
+    "CategoryPreview rendered with title:",
+    title,
+    "and products:",
+    products
+  );
   const handleRedirect = (title) => {
     navigate(`/shop/${title}`);
   };
@@ -12,7 +17,7 @@ const CategoryPreview = ({ title, products }) => {
   return (
     <div className="category-preview">
       <h2 className="category-title" onClick={() => handleRedirect(title)}>
-        {title.toUpperCase()}
+        {title?.toUpperCase()}
       </h2>
       <div className="preview">
         {products

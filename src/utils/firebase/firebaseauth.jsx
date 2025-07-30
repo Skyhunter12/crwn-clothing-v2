@@ -118,10 +118,20 @@ export const getcatalogAndDocuments = async (collectionKey) => {
   const collectionRef = collection(db, collectionKey);
   const q = query(collectionRef);
   const snapshot = await getDocs(q);
-  const documents = snapshot.docs.reduce((acc, doc_snapshot) => {
-    const { title, items } = doc_snapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
+  const documents = snapshot.docs.map((docSnapShot) => docSnapShot.data());
+  console.log(documents);
   return await documents;
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };

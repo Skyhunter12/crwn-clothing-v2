@@ -1,12 +1,10 @@
 import { useState } from "react";
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebaseauth";
 import { FormInput } from "../../utils/Form-input/form-input.component";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../utils/button/button.component";
+import { useDispatch } from "react-redux";
+import { signUpStart } from "../store/user/user.action"; // Import the action to start
 
 const SignUpForm = () => {
   let defaultFormFields = {
@@ -15,11 +13,12 @@ const SignUpForm = () => {
     password: "",
     confirmPassword: "",
   };
+  const dispatch = useDispatch();
   let [formFields, setFormFields] = useState(defaultFormFields);
   let { displayName, email, password, confirmPassword } = formFields;
 
-  let requestFormReset = async () => {
-    await setFormFields(defaultFormFields);
+  let requestFormReset = () => {
+    setFormFields(defaultFormFields);
   };
   console.log("SignUpForm rendered with formFields:", formFields);
   let handleChange = (event) => {
@@ -34,18 +33,7 @@ const SignUpForm = () => {
       return;
     }
     try {
-      let { user } = await createAuthUserWithEmailAndPassword(email, password);
-
-      if (!user) {
-        console.error("User creation failed");
-        return;
-      }
-
-      // Optionally, you can also save the displayName to the user profile
-      // This can be done using a function like createUserDocumentFromAuth(userCredential.user, { displayName });
-      // For now, we will just log the userCredential
-      await createUserDocumentFromAuth(user, { displayName });
-      await requestFormReset();
+      dispatch(signUpStart(email, password, displayName));
     } catch (error) {
       console.error("Error creating user:", error);
       if (error.code === "auth/email-already-in-use") {

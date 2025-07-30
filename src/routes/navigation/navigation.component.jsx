@@ -2,23 +2,28 @@ import { Outlet } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 // import "./navigation.styles.scss"; // Assuming you have a CSS file for styles
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg"; // Adjust the path to your logo image
-import { useContext } from "react";
-import { UserContext } from "../../context/user.context"; // Import the UserContext
-import { signOutUser } from "../../utils/firebase/firebaseauth"; // Import the signOutUser function
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import { CartContext } from "../../context/cart.context"; // Import the CartContext
+import { selectIsCartOpen } from "../store/cart/cart.selector.js";
+import { selectCurrentUser } from "../store/user/user.selector";
+import { useDispatch } from "react-redux";
+import { signOutStart } from "../store/user/user.action"; // Import the action to start sign out
+// Import the selector
 import {
   LogoContainer,
   NavigationContainer,
   NavLinks,
   NavLink,
 } from "./navigation.style.jsx"; // Import styled components
+import { useSelector } from "react-redux";
 const Navigation = () => {
-  const { isCartOpen } = useContext(CartContext);
-
-  let { currentUser } = useContext(UserContext);
-
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+  // const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCartOpen);
+  const signOutUser = () => {
+    dispatch(signOutStart()); // Dispatch the signOut action
+  };
   return (
     <Fragment>
       <NavigationContainer>
@@ -32,7 +37,7 @@ const Navigation = () => {
             <NavLink
               as="span"
               style={{ cursor: "pointer" }}
-              onClick={signOutUser}
+              onClick={signOutUser} // Dispatch the signOut action
             >
               Sign Out
             </NavLink>

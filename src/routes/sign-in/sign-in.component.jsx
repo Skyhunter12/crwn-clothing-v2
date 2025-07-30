@@ -1,14 +1,11 @@
-import {
-  signInWithGooglePopup,
-  createUserDocumentFromAuth,
-  signInAuthWithEmailAndPassword,
-} from "../../utils/firebase/firebaseauth";
 import { useState } from "react";
 import "./sign-in.styles.scss"; // Assuming you have a CSS file for styles
 import { FormInput } from "../../utils/Form-input/form-input.component";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../utils/button/button.component"; // Import the Button component
+import { useDispatch } from "react-redux";
+import { googleSignInStart, emailSignInStart } from "../store/user/user.action"; // Import the action to start Google sign-in
 
 const defaultFormFields = {
   email: "",
@@ -16,23 +13,12 @@ const defaultFormFields = {
 };
 
 const Signin = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [formFields, setFormFields] = useState(defaultFormFields);
 
-  let signInWithGoogle = async () => {
-    setLoading(true);
-    try {
-      // This will open a popup for Google sign-in
-      // and return the user credentials
-      let { user } = await signInWithGooglePopup();
-      await user.getIdToken(true);
-      let userDoc = await createUserDocumentFromAuth(user);
-
-      return userDoc;
-    } catch (error) {
-      console.error("Error signing in with Google:", error);
-    }
-    setLoading(false);
+  const signInWithGoogle = async () => {
+    dispatch(googleSignInStart());
   };
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -49,13 +35,7 @@ const Signin = () => {
     try {
       // Here you would typically call a function to sign in with email and password
       // For example, using Firebase's signInWithEmailAndPassword
-      let { user } = await signInAuthWithEmailAndPassword(email, password);
-
-      if (user) {
-        await resetFormFields();
-      } else {
-        console.error("Sign-in failed");
-      }
+      dispatch(emailSignInStart(email, password));
     } catch (error) {
       console.error("Error signing in with email and password:", error);
       switch (error.code) {
@@ -84,11 +64,23 @@ const Signin = () => {
         <span>Sign in with your email and password</span>
         <div>
           <label htmlFor="email"></label>
-          <FormInput label="Email" type="email" id="email" required onChange={handleChange} />
+          <FormInput
+            label="Email"
+            type="email"
+            id="email"
+            required
+            onChange={handleChange}
+          />
         </div>
         <div>
           <label htmlFor="password"></label>
-          <FormInput label="Password" type="password" id="password" required onChange={handleChange} />
+          <FormInput
+            label="Password"
+            type="password"
+            id="password"
+            required
+            onChange={handleChange}
+          />
         </div>
         <div className="buttons">
           <Button buttonType={BUTTON_TYPE_CLASSES.base} type="submit">
