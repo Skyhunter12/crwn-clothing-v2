@@ -2,6 +2,12 @@
   functions = ".netlify/functions"
   publish = "build"
 
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    Cross-Origin-Embedder-Policy = "unsafe-none"
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
