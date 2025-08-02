@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
+    "@stripe/react-stripe-js": "^3.8.1",
+    "@stripe/stripe-js": "^7.7.0",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
+    "dotenv": "^17.2.1",
     "firebase": "^11.10.0",
     "persist": "^0.2.7",
     "react": "^18.2.0",
@@ -21,6 +25,7 @@
     "reselect": "^5.1.1",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
+    "stripe": "^18.4.0",
     "styled-components": "^6.1.13",
     "web-vitals": "2.1.4"
   },

@@ -3,7 +3,7 @@ import { rootReducer } from "./rootReducer";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
-// import {thunk} from "redux-thunk";
+// // import {thunk} from "redux-thunk";
 import reduxSagaMiddleware from "redux-saga";
 import { rootSaga } from "./root-saga";
 
@@ -32,7 +32,8 @@ export const componsedEnhancers = composeEnhancer(
   applyMiddleware(...middlewares)
 );
 
-export const store = createStore(
+export const store = 
+createStore(
   persistedReducer,
   undefined,
   componsedEnhancers

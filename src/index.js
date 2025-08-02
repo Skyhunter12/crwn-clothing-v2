@@ -5,19 +5,20 @@ import "./index.scss";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import { UserProvider } from "./context/user.context";
-import { store, persistor } from "./routes/store/store"; // Import the store
+import { store } from "./routes/store/store"; // Import the store
 import { PersistGate } from "redux-persist/integration/react";
 // import { CategoriesProvider } from "./context/catagories.context";
-
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "./utils/stripe/stripe.utils"; // Import the stripe promise
+import { persistor } from "./routes/store/store";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          <UserProvider>
+          <Elements stripe={stripePromise}>
             <App />
-          </UserProvider>
+          </Elements>
         </BrowserRouter>
       </PersistGate>
     </Provider>
