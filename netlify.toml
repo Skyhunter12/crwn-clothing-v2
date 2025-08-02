@@ -7,6 +7,8 @@
   [headers.values]
     Cross-Origin-Opener-Policy = "unsafe-none"
     Cross-Origin-Embedder-Policy = "unsafe-none"
+    Referrer-Policy = "no-referrer-when-downgrade"
+
 
 [[redirects]]
   from = "/api/*"
