@@ -34,7 +34,7 @@ const PaymentForm = () => {
       console.error("Payment submission failed");
       return;
     }
-    const { paymentIntent:{client_secret}, error } = response;
+    const { paymentIntent:{client_secret}} = response;
     console.log("secret", client_secret);
     const paymentResult = await stripe.confirmCardPayment(client_secret, {
       payment_method:{
