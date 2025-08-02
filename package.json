@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "ajv": "^8.17.1",
     "resolve-url-loader": "^5.0.0"
   }
 }
