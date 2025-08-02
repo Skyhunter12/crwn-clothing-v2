@@ -8,13 +8,13 @@ import Checkout from "./routes/check-out/check-out.component";
 import Home from "./routes/home/home.component";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { checkGoogleRedirectResult, checkUserSession } from "./routes/store/user/user.action";
+import {  checkUserSession } from "./routes/store/user/user.action";
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(checkUserSession());
-    dispatch(checkGoogleRedirectResult())
+    // dispatch(checkGoogleRedirectResult())
   }, [dispatch]);
   return (
     <Routes>
