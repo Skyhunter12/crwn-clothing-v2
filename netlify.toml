@@ -5,9 +5,9 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Cross-Origin-Embedder-Policy = "same-origin-allow-popups"
+    Cross-Origin-Embedder-Policy = "unsafe-none"
+    Cross-Origin-Opener-Policy= "unsafe-none"
     Referrer-Policy = "no-referrer-when-downgrade"
-    Cross-Origin-Opener-Policy= "same-origin-allow-popups"
 
 
 [[redirects]]
