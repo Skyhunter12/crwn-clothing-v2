@@ -1,0 +1,14 @@
+# public/_headers
+/*
+  Cross-Origin-Opener-Policy: unsafe-none
+  Cross-Origin-Embedder-Policy: unsafe-none
+  Referrer-Policy: no-referrer-when-downgrade
+
+/__/auth/*
+  Cross-Origin-Opener-Policy: unsafe-none
+  Cross-Origin-Embedder-Policy: unsafe-none
+
+/oauth2/auth/*
+  Cross-Origin-Opener-Policy: unsafe-none
+  Cross-Origin-Embedder-Policy: unsafe-none
+  
